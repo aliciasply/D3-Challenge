@@ -27,13 +27,8 @@ function makeResponsive() {
     var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-    // // Initial Parameters
-    // var chosenXAxis = "age";
-    // var chosenYAxis = "smokers"
-
-
     // Read CSV using d3.csv
-    d3.csv("/assets/data/data.csv").then(function(journalData) {
+    d3.csv("../assets/data/data.csv").then(function(journalData) {
         console.log(journalData);
         // step 1: Parse Data/Cast as numbers
         journalData.forEach(function(data){
