@@ -33,7 +33,7 @@ function makeResponsive() {
 
 
     // Read CSV using d3.csv
-    d3.csv("assets/data/data.csv").then(function(journalData) {
+    d3.csv("/D3_data_journalism/assets/data/data.csv").then(function(journalData) {
         console.log(journalData);
         // step 1: Parse Data/Cast as numbers
         journalData.forEach(function(data){
