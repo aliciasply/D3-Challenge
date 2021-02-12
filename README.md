@@ -13,7 +13,7 @@ The data set included with the assignment is based on 2014 ACS 1-year estimates 
 
 ### D3 Dabbler 
 
-![4-scatter](Images/4-scatter.jpg)
+![Graph](Images/graph-1.jpg)
 
 Create a scatter plot between two of the data variables such as `Smokers vs. Age`.
 
