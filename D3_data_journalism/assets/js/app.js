@@ -43,12 +43,12 @@ function makeResponsive() {
         });
         // step 2: create scale functions
         var xLinearScale = d3.scaleLinear()
-            .domain([20, d3.max(journalData, d => d.age)])
+            .domain([d3.min(journalData, d => d.age), d3.max(journalData, d => d.age)]) //spacing of the circle
             .range([0, width])
             .nice();  // making the intersection of axes looks nice
         
         var yLinearScale = d3.scaleLinear()
-            .domain([0, d3.max(journalData, d => d.smokes)])
+            .domain([d3.min(journalData, d => d.smokes), d3.max(journalData, d => d.smokes)])
             .range([height, 0])
             .nice();
 
@@ -72,8 +72,21 @@ function makeResponsive() {
         .attr("cx", d => xLinearScale(d.age))
         .attr("cy", d => yLinearScale(d.smokes))
         .attr("r", "15")
-        .attr("fill", "pink")
+        .attr("fill", "black")
         .classed("stateCircle", true)
+        .attr("opacity", 0.75);
+
+        // adding the State Name to the individual circle
+        chartGroup.selectAll()
+        .data(journalData)
+        .enter()
+        .append("text")
+        .attr("x", d => xLinearScale(d.age))
+        .attr("y", d => yLinearScale(d.smokes))
+        .text(d => d.abbr)
+        .attr("font-size", "12")
+        .style("fill", "black") //instead of attr, use style
+        .classed("stateText", true)
         .attr("opacity", 0.75);
 
         // Step 6: Initialize tool tip
@@ -106,16 +119,19 @@ function makeResponsive() {
         .attr("x", 0 - (height / 2))
         .attr("dy", "16px")
         .attr("class", "axisText")
+        .classed("active", true)
         .text("Smokes (%)");
 
         chartGroup.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
+        .classed("active", true)
         .text("Age (Median)");
     }).catch(function(error) {
         console.log(error);
     });
 }
 makeResponsive();
+
 
   
